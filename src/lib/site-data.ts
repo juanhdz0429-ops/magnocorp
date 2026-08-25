@@ -4,9 +4,9 @@ export const WHATSAPP_LOCAL = "6699326296";
 export const WHATSAPP_NUMBER = `52${WHATSAPP_LOCAL}`;
 
 export function waLink(message: string) {
-  // api.whatsapp.com/send es el enlace más confiable: abre WhatsApp Web en escritorio
-  // y la app en móvil, incluso cuando la página se muestra dentro de un iframe.
-  return `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
+  // wa.me evita que WhatsApp intente cargarse dentro del iframe del preview,
+  // donde api.whatsapp.com puede rechazar la conexión por políticas de seguridad.
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
 
