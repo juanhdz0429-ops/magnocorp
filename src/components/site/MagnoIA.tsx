@@ -8,6 +8,20 @@ import { cn } from "@/lib/utils";
 
 type Message = { role: "user" | "assistant"; content: string };
 
+/** Minimal markdown rendering: **bold** segments, plain text elsewhere. */
+function renderRich(content: string) {
+  return content.split(/(\*\*[^*]+\*\*)/g).map((chunk, i) =>
+    chunk.startsWith("**") && chunk.endsWith("**") && chunk.length > 4 ? (
+      <strong key={i} className="font-semibold">
+        {chunk.slice(2, -2)}
+      </strong>
+    ) : (
+      <span key={i}>{chunk}</span>
+    ),
+  );
+}
+
+
 const SUGGESTIONS = [
   "¿Cómo puedo aumentar mis ventas?",
   "¿Cómo puedo utilizar IA en mi empresa?",
