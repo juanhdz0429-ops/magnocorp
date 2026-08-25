@@ -122,7 +122,7 @@ export function MagnoIA() {
                         : "border border-white/10 bg-white/8 text-white/85",
                     )}
                   >
-                    {message.content}
+                    {renderRich(message.content)}
                   </p>
                 </div>
               ))}
