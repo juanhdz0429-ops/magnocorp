@@ -195,7 +195,7 @@ export function computeResult(answers: Answers): DiagnosticResult {
   }));
 
   const global = Math.round(areas.reduce((acc, a) => acc + a.score, 0) / areas.length);
-  const level = LEVELS.find((l) => global <= l.max) ?? LEVELS[LEVELS.length - 1];
+  const level = LEVELS.find((l) => global <= l.max) ?? LEVELS[LEVELS.length - 1]!;
 
   const sorted = [...areas].sort((a, b) => a.score - b.score);
   const opportunities = sorted.slice(0, 3);

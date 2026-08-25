@@ -91,12 +91,15 @@ export function Diagnostic() {
   }
 
   function answer(optionIndex: number) {
-    setAnswers((prev) => ({ ...prev, [question.id]: optionIndex }));
+    if (!question) return;
+    const qid = question.id;
+    setAnswers((prev) => ({ ...prev, [qid]: optionIndex }));
     window.setTimeout(() => {
       if (index < QUESTIONS.length - 1) setIndex((v) => v + 1);
-      else finish({ ...answers, [question.id]: optionIndex });
+      else void finish({ ...answers, [qid]: optionIndex });
     }, 220);
   }
+
 
   async function finish(finalAnswers: Answers) {
     const computed = computeResult(finalAnswers);
