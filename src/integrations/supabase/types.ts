@@ -14,16 +14,195 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      leads: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          marketing_consent: boolean
+          phone: string | null
+          privacy_notice_version: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          marketing_consent?: boolean
+          phone?: string | null
+          privacy_notice_version: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          marketing_consent?: boolean
+          phone?: string | null
+          privacy_notice_version?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      request_limits: {
+        Row: {
+          attempts: number
+          key_hash: string
+          window_start: string
+        }
+        Insert: {
+          attempts?: number
+          key_hash: string
+          window_start?: string
+        }
+        Update: {
+          attempts?: number
+          key_hash?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      resource_accesses: {
+        Row: {
+          access_status: string
+          id: string
+          lead_id: string
+          requested_at: string
+          resource_id: string
+        }
+        Insert: {
+          access_status?: string
+          id?: string
+          lead_id: string
+          requested_at?: string
+          resource_id: string
+        }
+        Update: {
+          access_status?: string
+          id?: string
+          lead_id?: string
+          requested_at?: string
+          resource_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resource_accesses_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "resource_accesses_resource_id_fkey"
+            columns: ["resource_id"]
+            isOneToOne: false
+            referencedRelation: "resources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      resources: {
+        Row: {
+          access_button_text: string
+          category: string
+          cover_storage_key: string | null
+          created_at: string
+          created_by: string | null
+          description: string
+          download_enabled: boolean
+          duration: string | null
+          file_storage_key: string | null
+          id: string
+          published_at: string | null
+          resource_type: Database["public"]["Enums"]["resource_type"]
+          slug: string
+          status: Database["public"]["Enums"]["resource_status"]
+          title: string
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          access_button_text?: string
+          category: string
+          cover_storage_key?: string | null
+          created_at?: string
+          created_by?: string | null
+          description: string
+          download_enabled?: boolean
+          duration?: string | null
+          file_storage_key?: string | null
+          id?: string
+          published_at?: string | null
+          resource_type: Database["public"]["Enums"]["resource_type"]
+          slug: string
+          status?: Database["public"]["Enums"]["resource_status"]
+          title: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          access_button_text?: string
+          category?: string
+          cover_storage_key?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          download_enabled?: boolean
+          duration?: string | null
+          file_storage_key?: string | null
+          id?: string
+          published_at?: string | null
+          resource_type?: Database["public"]["Enums"]["resource_type"]
+          slug?: string
+          status?: Database["public"]["Enums"]["resource_status"]
+          title?: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      claim_first_admin: { Args: never; Returns: boolean }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
+      resource_status: "draft" | "published" | "archived"
+      resource_type: "pdf" | "video" | "other"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +329,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+      resource_status: ["draft", "published", "archived"],
+      resource_type: ["pdf", "video", "other"],
+    },
   },
 } as const
