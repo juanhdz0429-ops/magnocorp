@@ -94,22 +94,34 @@ export type Database = {
           access_status: string
           id: string
           lead_id: string
+          marketing_consent: boolean
+          privacy_notice_version: string | null
           requested_at: string
           resource_id: string
+          submitted_name: string | null
+          submitted_phone: string | null
         }
         Insert: {
           access_status?: string
           id?: string
           lead_id: string
+          marketing_consent?: boolean
+          privacy_notice_version?: string | null
           requested_at?: string
           resource_id: string
+          submitted_name?: string | null
+          submitted_phone?: string | null
         }
         Update: {
           access_status?: string
           id?: string
           lead_id?: string
+          marketing_consent?: boolean
+          privacy_notice_version?: string | null
           requested_at?: string
           resource_id?: string
+          submitted_name?: string | null
+          submitted_phone?: string | null
         }
         Relationships: [
           {
