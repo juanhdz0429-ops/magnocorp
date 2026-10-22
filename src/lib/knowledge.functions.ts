@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { getRequest, setResponseHeader } from "@tanstack/react-start/server";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
-import { accessSchema, resourceSchema, settingsSchema, dateFilterSchema, canDownload, isPublished, csvCell, FILE_MIME_TYPES, COVER_MIME_TYPES, type AccessResult, type PublicResource } from "./knowledge";
+import { accessSchema, resourceSchema, settingsSchema, dateFilterSchema, canDownload, isPublished, csvCell, accessLimitIdentity, FILE_MIME_TYPES, COVER_MIME_TYPES, type AccessResult, type PublicResource } from "./knowledge";
 
 export const getKnowledgeCatalog = createServerFn({ method: "GET" }).handler(async () => {
   const { publicClient, browserStorageUrl } = await import("./knowledge.server");
@@ -36,7 +36,7 @@ export const requestResourceAccess = createServerFn({ method: "POST" })
     const published = await publicDb.from("public_resources").select("id").eq("id", data.resource_id).maybeSingle();
     if (!published.data) return { ok: false, error: "Este recurso no está disponible. Elige otro material." };
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const identity = getRequest().headers.get("cf-connecting-ip") ?? new URL(getRequest().url).hostname;
+    const identity = accessLimitIdentity(getRequest().headers.get("cf-connecting-ip"), data.email);
     const hashBytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(identity + ":" + (process.env["SUPABASE_SERVICE_ROLE_KEY"] ?? "")));
     const keyHash = Array.from(new Uint8Array(hashBytes)).map(v => v.toString(16).padStart(2, "0")).join("");
     const allowed = await supabaseAdmin.rpc("consume_resource_limit", { p_hash: keyHash });

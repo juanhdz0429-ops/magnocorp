@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import { strictEqual } from "node:assert";
 const expect = (actual: unknown) => ({ toBe: (expected: unknown) => strictEqual(actual, expected) });
-import { accessSchema, resourceSchema, isPublished, canDownload, csvCell } from "./knowledge";
+import { accessSchema, resourceSchema, isPublished, canDownload, csvCell, accessLimitIdentity } from "./knowledge";
 
 const access = { resource_id: "11111111-1111-4111-8111-111111111111", full_name: "Juan Hernández", email: "juan@example.com" };
 const resource = { title: "Guía empresarial", slug: "guia-empresarial", description: "Una guía práctica para empresas", category: "Ventas", resource_type: "pdf", status: "published", published_at: "2026-10-22T01:00:00Z", file_storage_key: "files/guia.pdf" };
@@ -23,4 +23,5 @@ describe("resource access rules", () => {
   it("excludes drafts", () => expect(isPublished({ status: "draft", published_at: "2026-10-20T00:00:00Z" }, Date.parse("2026-10-22T00:00:00Z"))).toBe(false));
   it("excludes future publications", () => expect(isPublished({ status: "published", published_at: "2026-10-23T00:00:00Z" }, Date.parse("2026-10-22T00:00:00Z"))).toBe(false));
   it("escapes spreadsheet formulas in prospect exports", () => expect(csvCell("=IMPORTDATA(\"url\")")).toBe('"\'=IMPORTDATA(""url"")"'));
+  it("does not share the request allowance between unrelated visitors without an IP", () => expect(accessLimitIdentity(null, "one@example.com") === accessLimitIdentity(null, "two@example.com")).toBe(false));
 });
