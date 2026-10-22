@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1792634219028,
+      "tag": "0000_knowledge_library",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792634287484,
+      "tag": "0001_knowledge_public_catalog_and_access",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792634736131,
+      "tag": "0002_knowledge_catalog_invoker_security",
+      "breakpoints": true
+    }
+  ]
+}

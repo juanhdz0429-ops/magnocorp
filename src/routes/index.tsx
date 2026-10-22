@@ -65,7 +65,7 @@ export const Route = createFileRoute("/")({
       { property: "og:locale", content: "es_MX" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://magnocorp.online" }],
     scripts: [{ type: "application/ld+json", children: JSON.stringify(STRUCTURED_DATA) }],
   }),
   component: Index,

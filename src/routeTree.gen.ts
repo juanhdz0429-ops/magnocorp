@@ -10,33 +10,119 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ConocimientoRouteImport } from './routes/conocimiento'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as ConocimientoIndexRouteImport } from './routes/conocimiento.index'
+import { Route as ConocimientoSlugRouteImport } from './routes/conocimiento.$slug'
+import { Route as AuthenticatedAdminConocimientoRouteImport } from './routes/_authenticated/admin.conocimiento'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConocimientoRoute = ConocimientoRouteImport.update({
+  id: '/conocimiento',
+  path: '/conocimiento',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConocimientoIndexRoute = ConocimientoIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ConocimientoRoute,
+} as any)
+const ConocimientoSlugRoute = ConocimientoSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ConocimientoRoute,
+} as any)
+const AuthenticatedAdminConocimientoRoute =
+  AuthenticatedAdminConocimientoRouteImport.update({
+    id: '/admin/conocimiento',
+    path: '/admin/conocimiento',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/conocimiento': typeof ConocimientoRouteWithChildren
+  '/reset-password': typeof ResetPasswordRoute
+  '/conocimiento/$slug': typeof ConocimientoSlugRoute
+  '/conocimiento/': typeof ConocimientoIndexRoute
+  '/admin/conocimiento': typeof AuthenticatedAdminConocimientoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/conocimiento/$slug': typeof ConocimientoSlugRoute
+  '/conocimiento': typeof ConocimientoIndexRoute
+  '/admin/conocimiento': typeof AuthenticatedAdminConocimientoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/conocimiento': typeof ConocimientoRouteWithChildren
+  '/reset-password': typeof ResetPasswordRoute
+  '/conocimiento/$slug': typeof ConocimientoSlugRoute
+  '/conocimiento/': typeof ConocimientoIndexRoute
+  '/_authenticated/admin/conocimiento': typeof AuthenticatedAdminConocimientoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/conocimiento'
+    | '/reset-password'
+    | '/conocimiento/$slug'
+    | '/conocimiento/'
+    | '/admin/conocimiento'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/conocimiento/$slug'
+    | '/conocimiento'
+    | '/admin/conocimiento'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/conocimiento'
+    | '/reset-password'
+    | '/conocimiento/$slug'
+    | '/conocimiento/'
+    | '/_authenticated/admin/conocimiento'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ConocimientoRoute: typeof ConocimientoRouteWithChildren
+  ResetPasswordRoute: typeof ResetPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +134,89 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conocimiento': {
+      id: '/conocimiento'
+      path: '/conocimiento'
+      fullPath: '/conocimiento'
+      preLoaderRoute: typeof ConocimientoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conocimiento/': {
+      id: '/conocimiento/'
+      path: '/'
+      fullPath: '/conocimiento/'
+      preLoaderRoute: typeof ConocimientoIndexRouteImport
+      parentRoute: typeof ConocimientoRoute
+    }
+    '/conocimiento/$slug': {
+      id: '/conocimiento/$slug'
+      path: '/$slug'
+      fullPath: '/conocimiento/$slug'
+      preLoaderRoute: typeof ConocimientoSlugRouteImport
+      parentRoute: typeof ConocimientoRoute
+    }
+    '/_authenticated/admin/conocimiento': {
+      id: '/_authenticated/admin/conocimiento'
+      path: '/admin/conocimiento'
+      fullPath: '/admin/conocimiento'
+      preLoaderRoute: typeof AuthenticatedAdminConocimientoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminConocimientoRoute: typeof AuthenticatedAdminConocimientoRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminConocimientoRoute: AuthenticatedAdminConocimientoRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+interface ConocimientoRouteChildren {
+  ConocimientoSlugRoute: typeof ConocimientoSlugRoute
+  ConocimientoIndexRoute: typeof ConocimientoIndexRoute
+}
+
+const ConocimientoRouteChildren: ConocimientoRouteChildren = {
+  ConocimientoSlugRoute: ConocimientoSlugRoute,
+  ConocimientoIndexRoute: ConocimientoIndexRoute,
+}
+
+const ConocimientoRouteWithChildren = ConocimientoRoute._addFileChildren(
+  ConocimientoRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ConocimientoRoute: ConocimientoRouteWithChildren,
+  ResetPasswordRoute: ResetPasswordRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

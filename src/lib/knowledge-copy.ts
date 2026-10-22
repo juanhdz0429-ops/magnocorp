@@ -1,0 +1,15 @@
+import { Clock3, Megaphone, MessageSquare, ChartNoAxesCombined } from "lucide-react";
+
+export const BENEFITS = [
+  { icon: Clock3, title: "Ahorro de tiempo", text: "Automatiza tareas repetitivas y dedica más tiempo a las actividades que generan valor." },
+  { icon: Megaphone, title: "Marketing más eficiente", text: "Genera ideas para campañas, publicaciones, anuncios y estrategias de comunicación." },
+  { icon: MessageSquare, title: "Mejor atención al cliente", text: "Prepara respuestas frecuentes, organiza preguntas de tus clientes y diseña experiencias de servicio más ágiles." },
+  { icon: ChartNoAxesCombined, title: "Decisiones más inteligentes", text: "Utiliza la IA para organizar datos, comparar alternativas, analizar resultados y detectar oportunidades, verificando siempre la información generada." },
+];
+export const PROMPTS = [
+  { title: "Crear contenido para redes sociales", text: "Un emprendedor puede utilizar un asistente de IA para generar ideas de publicaciones, redactar textos publicitarios y preparar un calendario de contenido.", prompt: "Actúa como especialista en marketing digital y crea cinco publicaciones para promocionar mi cafetería. Utiliza un tono cercano, destaca mis productos y termina cada publicación con una llamada a la acción." },
+  { title: "Mejorar las ventas", text: "Utiliza la IA para desarrollar argumentos comerciales, responder objeciones y preparar mensajes de seguimiento para prospectos.", prompt: "Crea tres mensajes de WhatsApp para dar seguimiento a una persona interesada en mis servicios, sin presionarla y destacando los beneficios de mi oferta." },
+  { title: "Analizar costos y precios", text: "Organiza los costos de tus productos, calcula márgenes y compara escenarios de precios. Revisa los cálculos antes de tomar decisiones financieras.", prompt: "Ayúdame a construir una tabla de costos para mi producto. Separa materias primas, mano de obra, costos indirectos y gastos comerciales. Calcula el costo unitario y presenta alternativas de precio con diferentes márgenes." },
+  { title: "Mejorar la atención al cliente", text: "Prepara preguntas frecuentes, guiones de atención y respuestas consistentes para las consultas más comunes.", prompt: "Diseña una guía de atención al cliente para mi negocio, con respuestas amables para consultas de precios, horarios, disponibilidad, garantías y seguimiento de pedidos." },
+  { title: "Desarrollar nuevas ideas de negocio", text: "Explora oportunidades, identifica segmentos de clientes y estructura propuestas de valor que posteriormente puedas validar con investigación de mercado.", prompt: "Actúa como asesor de emprendimiento y propón tres mejoras innovadoras para una pequeña tienda de ropa. Considera un presupuesto limitado y explica cómo validar cada idea con clientes reales." },
+];
