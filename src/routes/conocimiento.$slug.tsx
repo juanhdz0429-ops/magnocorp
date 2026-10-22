@@ -13,7 +13,7 @@ export const Route = createFileRoute("/conocimiento/$slug")({
   head: ({ loaderData }) => {
     const title = loaderData ? `${loaderData.title} | Conocimiento MagnoCorp` : "Recurso no disponible | MagnoCorp";
     const description = loaderData?.description ?? "Recursos educativos gratuitos para tu negocio.";
-    return { meta: [{ title }, { name: "description", content: description }, { property: "og:title", content: title }, { property: "og:description", content: description }, { property: "og:type", content: "article" }, { name: "twitter:card", content: "summary_large_image" }, ...(!loaderData ? [{ name: "robots", content: "noindex" }] : [])], links: loaderData ? [{ rel: "canonical", href: `https://magnocorp.online/conocimiento/${loaderData.slug}` }] : [] };
+    return { meta: [{ title }, { name: "description", content: description }, { property: "og:title", content: title }, { property: "og:description", content: description }, { property: "og:type", content: "article" }, { name: "twitter:card", content: "summary_large_image" }, ...(loaderData ? [{ property: "og:url", content: `https://magnocorp.online/conocimiento/${loaderData.slug}` }] : []), ...(loaderData?.cover_url?.startsWith("https://") ? [{ property: "og:image", content: loaderData.cover_url }, { name: "twitter:image", content: loaderData.cover_url }] : []), ...(!loaderData ? [{ name: "robots", content: "noindex" }] : [])], links: loaderData ? [{ rel: "canonical", href: `https://magnocorp.online/conocimiento/${loaderData.slug}` }] : [] };
   },
   component: ResourcePage,
 });

@@ -4,7 +4,7 @@
 
 - Biblioteca pública: `/conocimiento`.
 - Página pública de cada recurso: `/conocimiento/<slug>`.
-- Administración privada: `/admin/conocimiento` (también desde el enlace Administración del pie de página).
+- Administración privada: `/admin/conocimiento` (desde Administrar recursos en la biblioteca o Administración en el pie de página).
 - Acceso: `/auth`; recuperación: `/reset-password`.
 
 La biblioteca empieza vacía: no se han inventado descargas. Agrega tus PDF, videos o plantillas reales desde Crear recurso. Los borradores y archivados nunca aparecen en el catálogo público.
@@ -42,7 +42,7 @@ Los datos se guardan en **Cloud → Database → `leads`**; cada solicitud queda
 
 - Correo normalizado a minúsculas; un correo corresponde a un prospecto que puede solicitar varios recursos.
 - Repeticiones del mismo recurso en dos minutos reutilizan la solicitud; la interfaz bloquea doble clic durante el envío.
-- Consentimiento comercial independiente, desmarcado por defecto, almacenado con la versión del aviso.
+- Consentimiento comercial independiente, desmarcado por defecto y guardado por solicitud con la versión del aviso. Solicitar de nuevo con el mismo correo no sobrescribe la identidad ni la autorización de registros anteriores.
 - Filtros por fecha y recurso, solicitudes, nuevos prospectos, recursos más solicitados y exportación CSV autorizada.
 - CSV paginado sin el límite de 1.000 filas y protección contra fórmulas de hoja de cálculo.
 - No se muestra una tasa de conversión: no existe medición fiable de visitas individuales por recurso.
@@ -52,7 +52,7 @@ Los datos se guardan en **Cloud → Database → `leads`**; cada solicitud queda
 
 - Los roles se comprueban en cada acción del servidor y en las políticas de datos y archivos; iniciar sesión no concede privilegios.
 - El catálogo público es una proyección de columnas seguras; no incluye prospectos, enlaces de video privados ni claves de archivos descargables.
-- Validación Zod en navegador y servidor, protección CSRF, campo antispam y límite persistente por IP de 10 solicitudes cada 10 minutos (IP con hash, no en texto plano).
+- Validación Zod en navegador y servidor, protección CSRF, campo antispam y límite persistente de 10 solicitudes cada 10 minutos por IP cuando está disponible, o por correo normalizado cuando no está disponible (con hash, no en texto plano). El límite por correo no sustituye una protección contra abuso distribuido.
 - Datos personales enviados solo en el cuerpo de la solicitud, nunca en parámetros de URL ni logs.
 - Nuevas tablas con permisos explícitos y RLS. Archivos descargables sin lectura anónima.
 - Confirmación de eliminación con aviso de la pérdida de solicitudes del recurso. El prospecto permanece salvo que lo elimine el propietario.
