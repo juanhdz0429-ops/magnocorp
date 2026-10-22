@@ -213,3 +213,12 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+:root {
+  --knowledge-hero-overlay: linear-gradient(90deg, var(--navy-ink), color-mix(in oklab, var(--navy-ink) 90%, transparent) 30%, color-mix(in oklab, var(--navy-ink) 35%, transparent) 65%, transparent);
+}
+.knowledge-hero-shade { background-image: var(--knowledge-hero-overlay); }
+.knowledge-page h1, .knowledge-page h2, .knowledge-page h3 { letter-spacing: 0; }
+@media (max-width: 640px) {
+  .knowledge-hero-shade { background-color: color-mix(in oklab, var(--navy-ink) 75%, transparent); }
+}

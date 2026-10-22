@@ -19,12 +19,13 @@ export const CONTACT = {
   facebook: "MagnoCorp MZT",
 };
 
-export const NAV_LINKS = [
+export const NAV_LINKS: Array<{ id: string; label: string; path?: "/conocimiento" }> = [
   { id: "inicio", label: "Inicio" },
   { id: "servicios", label: "Servicios" },
   { id: "diagnostico", label: "Diagnóstico" },
   { id: "proyectos", label: "Proyectos" },
   { id: "blog", label: "Blog" },
+  { id: "conocimiento", label: "Conocimiento", path: "/conocimiento" },
   { id: "magnoia", label: "MagnoIA" },
   { id: "contacto", label: "Contacto" },
 ];

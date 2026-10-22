@@ -1,10 +1,12 @@
 import { Facebook, Mail, MessageCircle } from "lucide-react";
+import { Link, useLocation } from "@tanstack/react-router";
 import logo from "@/assets/magnocorp-logo.png.asset.json";
 import { CONTACT, NAV_LINKS, waLink } from "@/lib/site-data";
 
 const WHATSAPP_DEFAULT = "Hola MagnoCorp, me interesa recibir información sobre sus servicios de consultoría.";
 
 export function Footer() {
+  const pathname = useLocation({ select: (location) => location.pathname });
   return (
     <footer className="surface-navy">
       <div className="container-page grid gap-10 py-16 lg:grid-cols-[1.3fr_1fr_1fr]">
@@ -32,9 +34,9 @@ export function Footer() {
           <ul className="mt-5 space-y-2.5">
             {NAV_LINKS.map((link) => (
               <li key={link.id}>
-                <a href={`#${link.id}`} className="text-sm text-white/65 transition-colors hover:text-white">
+                {link.path ? <Link to={link.path} className="text-sm text-white/65 transition-colors hover:text-white">{link.label}</Link> : <a href={pathname === "/" ? `#${link.id}` : `/#${link.id}`} className="text-sm text-white/65 transition-colors hover:text-white">
                   {link.label}
-                </a>
+                </a>}
               </li>
             ))}
           </ul>
@@ -94,6 +96,7 @@ export function Footer() {
       <div className="border-t border-white/10 py-6">
         <p className="container-page text-center text-xs text-white/50">
           © 2026 MagnoCorp. Todos los derechos reservados.
+          <Link to="/admin/conocimiento" className="ml-4 underline">Administración</Link>
         </p>
       </div>
     </footer>
