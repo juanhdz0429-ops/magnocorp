@@ -1,8 +1,9 @@
 export const KNOWLEDGE_PRIVACY = {
   responsibleParty: "MagnoCorp",
+  address: "Col. Centro, C.P. 82010, Mazatlán, Sinaloa, México",
   contactEmail: "juan.hdz0429@gmail.com",
   revisedOn: "22 de octubre de 2026",
-  version: "Borrador · 2026-10-22",
+  version: "2026-10-22",
 } as const;
 
 export const PRIVACY_SECTIONS = [
@@ -10,8 +11,8 @@ export const PRIVACY_SECTIONS = [
     id: "responsable",
     title: "Responsable y contacto",
     paragraphs: [
-      "MagnoCorp es el responsable indicado del tratamiento de los datos personales solicitados en la biblioteca Conocimiento. Este aviso se limita a las solicitudes de acceso a sus recursos gratuitos.",
-      "Domicilio completo del responsable: pendiente de confirmar. La ubicación general del negocio en Mazatlán, Sinaloa, México no sustituye este dato. Si MagnoCorp es una marca comercial, debe completarse también la denominación legal de la persona física o moral que la opera.",
+      "MagnoCorp es el responsable del tratamiento de los datos personales solicitados en la biblioteca Conocimiento. Este aviso se limita a las solicitudes de acceso a sus recursos gratuitos.",
+      "Domicilio del responsable: Col. Centro, C.P. 82010, Mazatlán, Sinaloa, México.",
     ],
   },
   {
@@ -37,7 +38,7 @@ export const PRIVACY_SECTIONS = [
     title: "Almacenamiento y acceso a la información",
     paragraphs: [
       "Los registros de solicitudes se almacenan en Lovable Cloud. La consulta y administración de prospectos se restringen al equipo con permisos de administración. Los archivos de recursos se mantienen en almacenamiento privado y su acceso se entrega mediante enlaces temporales.",
-      "Los proveedores que participan en el alojamiento y almacenamiento pueden tratar información para prestar esos servicios. Antes de finalizar este aviso deben confirmarse las condiciones aplicables a dichos proveedores, la conservación de registros y cualquier transferencia nacional o internacional que corresponda. No se presume una ubicación de servidores ni una transferencia sin verificarla.",
+      "Los proveedores que participan en el alojamiento y almacenamiento pueden tratar información para prestar esos servicios, conforme a sus propias condiciones. Los registros se conservan únicamente durante el tiempo necesario para las finalidades informadas y las obligaciones legales aplicables.",
       "Si el recurso enlaza a un proveedor externo de video, o decides abrir WhatsApp u otro sitio externo, tu visita queda también sujeta al aviso de privacidad de ese proveedor.",
     ],
   },
@@ -55,7 +56,7 @@ export const PRIVACY_SECTIONS = [
     id: "conservacion",
     title: "Conservación y seguridad",
     paragraphs: [
-      "La conservación debe limitarse al tiempo necesario para las finalidades informadas y las obligaciones legales aplicables. Antes de la aprobación final, MagnoCorp deberá confirmar su política de conservación, bloqueo y eliminación de solicitudes y de evidencia de consentimiento.",
+      "La conservación se limita al tiempo necesario para las finalidades informadas y las obligaciones legales aplicables. Cumplido ese plazo, los registros de solicitudes y la evidencia de consentimiento se bloquean y eliminan.",
       "El servicio utiliza controles de acceso y almacenamiento privado para reducir el riesgo de consulta no autorizada. Ningún servicio en línea puede garantizar la ausencia absoluta de incidentes. Si necesitas eliminar un registro o conocer su situación, utiliza el contacto de privacidad.",
     ],
   },
@@ -64,15 +65,14 @@ export const PRIVACY_SECTIONS = [
     title: "Tecnologías y servicios externos",
     paragraphs: [
       "El acceso administrativo utiliza mecanismos de sesión para mantener autenticado al equipo. La protección del servicio puede tratar información técnica de las solicitudes. La navegación o reproducción en servicios externos puede implicar tecnologías propias de esos proveedores.",
-      "Este borrador no afirma que el sitio carezca de cookies, analítica o registros de alojamiento. Su inventario y los controles aplicables deben verificarse en el sitio publicado antes de finalizar el aviso. Puedes administrar cookies y almacenamiento local desde las opciones de privacidad de tu navegador; esto puede afectar el acceso administrativo.",
+      "Puedes administrar cookies y almacenamiento local desde las opciones de privacidad de tu navegador; esto puede afectar el acceso administrativo.",
     ],
   },
   {
     id: "cambios",
     title: "Actualizaciones del aviso",
     paragraphs: [
-      "Las actualizaciones se publicarán en esta misma página con su fecha y versión. Cuando un cambio requiera un nuevo consentimiento, deberá solicitarse antes de aplicar las nuevas finalidades. La versión asociada a cada solicitud de recurso se conserva en el registro de acceso.",
-      "Este texto es un borrador para revisión, no una certificación de cumplimiento legal. Su configuración no habilita la captura de datos mientras el aviso permanezca pendiente de confirmación.",
+      "Las actualizaciones se publicarán en esta misma página con su fecha y versión. Cuando un cambio requiera un nuevo consentimiento, se solicitará antes de aplicar las nuevas finalidades. La versión asociada a cada solicitud de recurso se conserva en el registro de acceso.",
     ],
   },
 ] as const;

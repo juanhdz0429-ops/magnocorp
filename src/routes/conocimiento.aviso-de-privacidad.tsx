@@ -37,13 +37,7 @@ function PrivacyNoticePage() {
           <p className="mt-5 text-sm text-muted-foreground">Última revisión: {KNOWLEDGE_PRIVACY.revisedOn} · {KNOWLEDGE_PRIVACY.version}</p>
         </div>
       </section>
-      <div className="container-page py-8">
-        <div role="note" className="border-l-2 border-accent bg-secondary p-5">
-          <p className="font-semibold text-primary">Borrador pendiente de completar</p>
-          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Falta confirmar el domicilio completo del responsable y revisar las condiciones de proveedores y conservación. La captura de datos de Conocimiento permanece deshabilitada hasta contar con un aviso confirmado.</p>
-        </div>
-      </div>
-      <div className="container-page grid items-start gap-10 pb-16 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-16">
+      <div className="container-page grid items-start gap-10 py-8 pb-16 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-16">
         <aside className="lg:sticky lg:top-28">
           <nav aria-label="Contenido del aviso de privacidad" className="border-y border-border py-5">
             <p className="mb-4 text-xs font-semibold uppercase text-accent">En este aviso</p>
