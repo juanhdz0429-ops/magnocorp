@@ -74,4 +74,6 @@ Antes de borrar datos importantes, conserva una exportación de prospectos y una
 
 ## Pruebas
 
-`bun test src/lib/knowledge.test.ts` verifica nombre/correo obligatorios, teléfono opcional y formato, consentimiento independiente, antispam, publicación con archivo, fechas, permisos de video y CSV seguro. La administración debe verificarse con una cuenta real autorizada; el acceso gratuito requiere un recurso real y el aviso confirmado.
+`bun test src/lib/knowledge.test.ts` verifica nombre/correo obligatorios, teléfono opcional y formato, consentimiento independiente, antispam, publicación con archivo, fechas, permisos de video y CSV seguro.
+
+Verificado en el navegador con una cuenta temporal autorizada: inicio de sesión, subida real de PDF y portada, guardado, publicación visible en la biblioteca, archivo oculto, eliminación, exportación CSV, configuración, cierre de sesión y rechazo de una cuenta sin rol. La cuenta, sus permisos y materiales de prueba se eliminaron. Se comprobó que el formulario permanece bloqueado sin aviso real. La captura y descarga final para visitantes siguen pendientes de un aviso confirmado y material propio; la recuperación por correo no se verificó con un enlace real.
