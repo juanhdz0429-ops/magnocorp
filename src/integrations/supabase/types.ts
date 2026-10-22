@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      knowledge_settings: {
+        Row: {
+          id: boolean
+          max_file_mb: number
+          privacy_notice_url: string | null
+          privacy_notice_version: string
+          updated_at: string
+        }
+        Insert: {
+          id?: boolean
+          max_file_mb?: number
+          privacy_notice_url?: string | null
+          privacy_notice_version?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: boolean
+          max_file_mb?: number
+          privacy_notice_url?: string | null
+          privacy_notice_version?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           created_at: string
@@ -93,6 +117,13 @@ export type Database = {
             columns: ["lead_id"]
             isOneToOne: false
             referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "resource_accesses_resource_id_fkey"
+            columns: ["resource_id"]
+            isOneToOne: false
+            referencedRelation: "public_resources"
             referencedColumns: ["id"]
           },
           {
@@ -187,16 +218,86 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      public_resources: {
+        Row: {
+          access_button_text: string | null
+          category: string | null
+          cover_storage_key: string | null
+          description: string | null
+          download_enabled: boolean | null
+          duration: string | null
+          id: string | null
+          published_at: string | null
+          resource_type: Database["public"]["Enums"]["resource_type"] | null
+          slug: string | null
+          title: string | null
+        }
+        Insert: {
+          access_button_text?: string | null
+          category?: string | null
+          cover_storage_key?: string | null
+          description?: string | null
+          download_enabled?: boolean | null
+          duration?: string | null
+          id?: string | null
+          published_at?: string | null
+          resource_type?: Database["public"]["Enums"]["resource_type"] | null
+          slug?: string | null
+          title?: string | null
+        }
+        Update: {
+          access_button_text?: string | null
+          category?: string | null
+          cover_storage_key?: string | null
+          description?: string | null
+          download_enabled?: boolean | null
+          duration?: string | null
+          id?: string | null
+          published_at?: string | null
+          resource_type?: Database["public"]["Enums"]["resource_type"] | null
+          slug?: string | null
+          title?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       claim_first_admin: { Args: never; Returns: boolean }
+      consume_resource_limit: { Args: { p_hash: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
         Returns: boolean
+      }
+      knowledge_lead_export: {
+        Args: { p_from: string; p_resource?: string; p_to: string }
+        Returns: {
+          access_id: string
+          email: string
+          full_name: string
+          marketing_consent: boolean
+          phone: string
+          privacy_notice_version: string
+          requested_at: string
+          resource_title: string
+        }[]
+      }
+      knowledge_metrics: {
+        Args: { p_from: string; p_resource?: string; p_to: string }
+        Returns: Json
+      }
+      record_resource_access: {
+        Args: {
+          p_consent: boolean
+          p_email: string
+          p_name: string
+          p_phone: string
+          p_privacy: string
+          p_resource: string
+        }
+        Returns: string
       }
     }
     Enums: {

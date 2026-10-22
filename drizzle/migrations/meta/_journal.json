@@ -8,6 +8,13 @@
       "when": 1792634219028,
       "tag": "0000_knowledge_library",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792634287484,
+      "tag": "0001_knowledge_public_catalog_and_access",
+      "breakpoints": true
     }
   ]
 }
