@@ -48,7 +48,7 @@ export function ResourceAccess({ resource, privacy, onClose }: { resource: Publi
         {!ready ? <p className="rounded-md bg-secondary p-3 text-sm text-muted-foreground">El acceso estará disponible cuando MagnoCorp publique su aviso de privacidad.</p> : null}
         {errors["form"] ? <p role="alert" className="text-sm text-destructive">{errors["form"]}</p> : null}
         <Button type="submit" disabled={busy || !ready} className="min-h-11 w-full">{busy ? <LoaderCircle className="animate-spin" /> : <Download />}{busy ? "Guardando solicitud…" : "Descargar gratis"}</Button>
-        <p className="text-xs leading-relaxed text-muted-foreground">Utilizaremos tus datos para gestionar el acceso al recurso solicitado y atender las finalidades que se expliquen en nuestro aviso de privacidad. {privacy?.privacy_notice_url ? <a className="text-primary underline" href={privacy.privacy_notice_url} target="_blank" rel="noopener noreferrer">Aviso de privacidad</a> : <Link className="text-primary underline" to="/conocimiento/aviso-de-privacidad" target="_blank" rel="noopener noreferrer">Aviso de privacidad (borrador)</Link>}</p>
+        <p className="text-xs leading-relaxed text-muted-foreground">Utilizaremos tus datos para gestionar el acceso al recurso solicitado y atender las finalidades que se expliquen en nuestro aviso de privacidad. {privacy?.privacy_notice_url ? <a className="text-primary underline" href={privacy.privacy_notice_url} target="_blank" rel="noopener noreferrer">Aviso de privacidad</a> : <Link className="text-primary underline" to="/conocimiento/aviso-de-privacidad" target="_blank" rel="noopener noreferrer">Aviso de privacidad</Link>}</p>
       </form>}
     </DialogContent>
   </Dialog>;
