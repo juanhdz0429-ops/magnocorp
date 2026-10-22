@@ -16,6 +16,7 @@ import { Route as ConocimientoRouteImport } from './routes/conocimiento'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ConocimientoIndexRouteImport } from './routes/conocimiento.index'
 import { Route as ConocimientoSlugRouteImport } from './routes/conocimiento.$slug'
+import { Route as ConocimientoAvisoDePrivacidadRouteImport } from './routes/conocimiento.aviso-de-privacidad'
 import { Route as AuthenticatedAdminConocimientoRouteImport } from './routes/_authenticated/admin.conocimiento'
 
 const IndexRoute = IndexRouteImport.update({
@@ -52,6 +53,12 @@ const ConocimientoSlugRoute = ConocimientoSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ConocimientoRoute,
 } as any)
+const ConocimientoAvisoDePrivacidadRoute =
+  ConocimientoAvisoDePrivacidadRouteImport.update({
+    id: '/aviso-de-privacidad',
+    path: '/aviso-de-privacidad',
+    getParentRoute: () => ConocimientoRoute,
+  } as any)
 const AuthenticatedAdminConocimientoRoute =
   AuthenticatedAdminConocimientoRouteImport.update({
     id: '/admin/conocimiento',
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/conocimiento': typeof ConocimientoRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
   '/conocimiento/$slug': typeof ConocimientoSlugRoute
+  '/conocimiento/aviso-de-privacidad': typeof ConocimientoAvisoDePrivacidadRoute
   '/conocimiento/': typeof ConocimientoIndexRoute
   '/admin/conocimiento': typeof AuthenticatedAdminConocimientoRoute
 }
@@ -73,6 +81,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/conocimiento/$slug': typeof ConocimientoSlugRoute
+  '/conocimiento/aviso-de-privacidad': typeof ConocimientoAvisoDePrivacidadRoute
   '/conocimiento': typeof ConocimientoIndexRoute
   '/admin/conocimiento': typeof AuthenticatedAdminConocimientoRoute
 }
@@ -84,6 +93,7 @@ export interface FileRoutesById {
   '/conocimiento': typeof ConocimientoRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
   '/conocimiento/$slug': typeof ConocimientoSlugRoute
+  '/conocimiento/aviso-de-privacidad': typeof ConocimientoAvisoDePrivacidadRoute
   '/conocimiento/': typeof ConocimientoIndexRoute
   '/_authenticated/admin/conocimiento': typeof AuthenticatedAdminConocimientoRoute
 }
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
     | '/conocimiento'
     | '/reset-password'
     | '/conocimiento/$slug'
+    | '/conocimiento/aviso-de-privacidad'
     | '/conocimiento/'
     | '/admin/conocimiento'
   fileRoutesByTo: FileRoutesByTo
@@ -103,6 +114,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/conocimiento/$slug'
+    | '/conocimiento/aviso-de-privacidad'
     | '/conocimiento'
     | '/admin/conocimiento'
   id:
@@ -113,6 +125,7 @@ export interface FileRouteTypes {
     | '/conocimiento'
     | '/reset-password'
     | '/conocimiento/$slug'
+    | '/conocimiento/aviso-de-privacidad'
     | '/conocimiento/'
     | '/_authenticated/admin/conocimiento'
   fileRoutesById: FileRoutesById
@@ -176,6 +189,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConocimientoSlugRouteImport
       parentRoute: typeof ConocimientoRoute
     }
+    '/conocimiento/aviso-de-privacidad': {
+      id: '/conocimiento/aviso-de-privacidad'
+      path: '/aviso-de-privacidad'
+      fullPath: '/conocimiento/aviso-de-privacidad'
+      preLoaderRoute: typeof ConocimientoAvisoDePrivacidadRouteImport
+      parentRoute: typeof ConocimientoRoute
+    }
     '/_authenticated/admin/conocimiento': {
       id: '/_authenticated/admin/conocimiento'
       path: '/admin/conocimiento'
@@ -199,11 +219,13 @@ const AuthenticatedRouteRouteWithChildren =
 
 interface ConocimientoRouteChildren {
   ConocimientoSlugRoute: typeof ConocimientoSlugRoute
+  ConocimientoAvisoDePrivacidadRoute: typeof ConocimientoAvisoDePrivacidadRoute
   ConocimientoIndexRoute: typeof ConocimientoIndexRoute
 }
 
 const ConocimientoRouteChildren: ConocimientoRouteChildren = {
   ConocimientoSlugRoute: ConocimientoSlugRoute,
+  ConocimientoAvisoDePrivacidadRoute: ConocimientoAvisoDePrivacidadRoute,
   ConocimientoIndexRoute: ConocimientoIndexRoute,
 }
 

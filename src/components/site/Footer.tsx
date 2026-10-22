@@ -96,6 +96,7 @@ export function Footer() {
       <div className="border-t border-white/10 py-6">
         <p className="container-page text-center text-xs text-white/50">
           © 2026 MagnoCorp. Todos los derechos reservados.
+          <Link to="/conocimiento/aviso-de-privacidad" className="ml-4 inline-block text-primary-foreground/70 underline hover:text-primary-foreground">Aviso de privacidad</Link>
           <Link to="/admin/conocimiento" className="ml-4 underline">Administración</Link>
         </p>
       </div>

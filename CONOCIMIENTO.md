@@ -3,6 +3,7 @@
 ## Páginas y administración
 
 - Biblioteca pública: `/conocimiento`.
+- Aviso de privacidad: `/conocimiento/aviso-de-privacidad`, enlazado desde el pie de página, el formulario de recursos y la configuración privada.
 - Página pública de cada recurso: `/conocimiento/<slug>`.
 - Administración privada: `/admin/conocimiento` (desde Administrar recursos en la biblioteca o Administración en el pie de página).
 - Acceso: `/auth`; recuperación: `/reset-password`.
@@ -17,7 +18,7 @@ Para autorizar más personas, asigna el rol `admin` en `user_roles` desde **Clou
 
 ## Antes de habilitar descargas
 
-1. En Administración → Configuración, agrega la URL **real** de tu aviso de privacidad y una versión distinta de `pending`. No se ha inventado una dirección ni un texto legal. Consulta con tu asesor para las obligaciones aplicables en México y la conservación de datos.
+1. Completa y revisa el borrador de aviso de privacidad de Conocimiento: MagnoCorp y `juan.hdz0429@gmail.com` fueron confirmados por el propietario, pero faltan el domicilio completo y la revisión de proveedores, conservación y tecnologías. No se ha inventado un domicilio ni activado la captura de datos. Una vez finalizado y aprobado, en Administración → Configuración agrega la URL real del aviso publicado y una versión distinta de `pending`. Consulta con tu asesor las obligaciones aplicables en México.
 2. Crea un recurso, carga su archivo y opcionalmente una portada.
 3. Elige una categoría, formato y fecha. Si dejas la fecha vacía al publicar, se utiliza el momento actual. Una fecha futura programa su aparición.
 4. Selecciona Publicado y guarda.
