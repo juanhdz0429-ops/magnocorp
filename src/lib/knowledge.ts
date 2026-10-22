@@ -45,6 +45,9 @@ export const dateFilterSchema = z.object({ from: z.string().datetime({ offset: t
 export function canDownload(r: { resource_type: string; download_enabled: boolean; file_storage_key?: string | null }) {
   return r.download_enabled && Boolean(r.file_storage_key);
 }
+export function accessLimitIdentity(ip: string | null, email: string) {
+  return ip ? `ip:${ip}` : `email:${email.trim().toLowerCase()}`;
+}
 export function isPublished(r: { status: string; published_at: string | null }, now = Date.now()) {
   return r.status === "published" && Boolean(r.published_at) && Date.parse(r.published_at ?? "") <= now;
 }

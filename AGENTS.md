@@ -14,4 +14,6 @@
 - Store resources and leads in Lovable Cloud, with private object buckets and temporary signed access URLs; browser storage is never the source of truth.
 - Keep role assignment in `user_roles`; bootstrap only the existing verified owner email when no administrator exists, and authorize every administrative server function independently.
 - Keep privacy configuration in `knowledge_settings` and require a confirmed notice before capturing resource leads; this avoids collecting personal data without a usable notice.
+- Preserve submitted identity and consent per resource access without overwriting existing lead identity; this prevents unauthenticated submissions from altering historical consent.
+- Keep password-recovery state in the root auth-event context; the auth client can consume the recovery URL before the reset form mounts.
 - Preserve the existing single-page sections and make their anchors point home from added pages; only Conocimiento gets new public navigation routes.

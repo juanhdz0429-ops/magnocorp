@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { ArrowDown, ArrowUpRight, BookOpen, Search, Sparkles, Copy, Check, FileText, Play, Clock3, SlidersHorizontal } from "lucide-react";
+import { ArrowDown, ArrowUpRight, BookOpen, Search, Sparkles, Copy, Check, FileText, Play, Clock3, SlidersHorizontal, ShieldCheck } from "lucide-react";
 import hero from "@/assets/conocimiento-hero.jpg";
 import { Header } from "@/components/site/Header";
 import { Footer, WhatsAppFloat } from "@/components/site/Footer";
@@ -33,6 +33,7 @@ export function KnowledgePage() {
       <div className="border-t border-primary-foreground/15"><div className="container-page flex flex-wrap gap-x-8 gap-y-3 py-5 text-xs text-primary-foreground/80"><span>Aprendizaje práctico</span><span>Recursos gratuitos</span><span>Ideas para tu negocio</span></div></div>
     </section>
     <section id="recursos" className="container-page py-16 sm:py-20">
+      <div className="mb-6 flex justify-end"><Button asChild variant="outline" size="sm"><Link to="/admin/conocimiento"><ShieldCheck />Administrar recursos</Link></Button></div>
       <div className="flex flex-wrap items-end justify-between gap-5"><div className="max-w-2xl"><p className="mb-3 text-xs font-bold uppercase text-accent">Biblioteca de recursos</p><h2 className="text-3xl leading-tight text-primary sm:text-4xl">Aprende gratis. Aplica hoy. Crece mañana.</h2><p className="mt-4 leading-relaxed text-muted-foreground">Accede a guías, plantillas, videos y materiales prácticos creados para ayudarte a desarrollar nuevas habilidades y aplicar el conocimiento en tu negocio.</p></div><div className="flex items-center gap-2 text-sm text-muted-foreground"><BookOpen className="size-4" />{data.resources.length} recursos disponibles</div></div>
       <div className="mt-9 flex flex-col gap-4 border-y border-border py-5 sm:flex-row"><div className="relative flex-1"><Search className="absolute top-3 left-3 size-4 text-muted-foreground" /><Input aria-label="Buscar recursos por título" placeholder="Buscar un recurso…" value={search} onChange={e => setSearch(e.target.value)} className="h-11 pl-10" /></div><label className="flex items-center gap-2 text-sm"><SlidersHorizontal className="size-4 text-muted-foreground" /><span className="sr-only">Tipo de recurso</span><select aria-label="Tipo de recurso" value={type} onChange={e => setType(e.target.value)} className="h-11 w-full rounded-md border border-input bg-background px-3 text-foreground sm:w-44"><option value="all">Todos los formatos</option><option value="pdf">PDF</option><option value="video">Video</option><option value="other">Plantilla</option></select></label></div>
       <div className="my-6 flex flex-wrap gap-2" aria-label="Categorías">{["Todos", ...CATEGORIES].map(c => <Button key={c} variant={category === c ? "default" : "outline"} size="sm" className="h-auto min-h-9 whitespace-normal text-xs" aria-pressed={category === c} onClick={() => setCategory(c)}>{c}</Button>)}</div>
