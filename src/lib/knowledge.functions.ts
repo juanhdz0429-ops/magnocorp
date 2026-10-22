@@ -53,7 +53,7 @@ export const requestResourceAccess = createServerFn({ method: "POST" })
       if (!signed.data) return { ok: false, error: "No se pudo preparar el recurso. Inténtalo nuevamente." };
       url = browserStorageUrl(signed.data.signedUrl);
       if (canDownload(r)) {
-        const dl = await supabaseAdmin.storage.from("knowledge-files").createSignedUrl(r.file_storage_key, 600, { download: r.file_storage_key.split("/").pop() });
+        const dl = await supabaseAdmin.storage.from("knowledge-files").createSignedUrl(r.file_storage_key, 600, { download: r.file_storage_key.split("/").pop() ?? true });
         if (!dl.data) return { ok: false, error: "No se pudo preparar la descarga." };
         download_url = browserStorageUrl(dl.data.signedUrl);
       }
@@ -141,7 +141,7 @@ export const saveKnowledgeSettings = createServerFn({ method: "POST" }).middlewa
 export const getKnowledgeMetrics = createServerFn({ method: "POST" }).middleware([requireSupabaseAuth]).inputValidator((input: unknown) => dateFilterSchema.parse(input)).handler(async ({ context, data }) => {
   const { requireAdmin } = await import("./knowledge.server");
   await requireAdmin(context.supabase, context.userId);
-  const params = { p_from: data.from, p_to: data.to, p_resource: data.resource_id ?? undefined };
+  const params = { p_from: data.from, p_to: data.to, ...(data.resource_id ? { p_resource: data.resource_id } : {}) };
   const [metrics, leads] = await Promise.all([
     context.supabase.rpc("knowledge_metrics", params),
     context.supabase.rpc("knowledge_lead_export", params, { count: "exact" }).range(data.page * 25, data.page * 25 + 24),
@@ -156,7 +156,7 @@ export const exportKnowledgeLeads = createServerFn({ method: "POST" }).middlewar
   await requireAdmin(context.supabase, context.userId);
   const rows: unknown[][] = [["Nombre", "Correo", "Teléfono", "Consentimiento comercial", "Versión de privacidad", "Fecha de solicitud", "Recurso"]];
   for (let offset = 0; ; offset += 1000) {
-    const result = await context.supabase.rpc("knowledge_lead_export", { p_from: data.from, p_to: data.to, p_resource: data.resource_id ?? undefined }).range(offset, offset + 999);
+    const result = await context.supabase.rpc("knowledge_lead_export", { p_from: data.from, p_to: data.to, ...(data.resource_id ? { p_resource: data.resource_id } : {}) }).range(offset, offset + 999);
     if (result.error) throw new Error("No se pudo exportar la información.");
     rows.push(...(result.data ?? []).map(r => [r.full_name, r.email, r.phone, r.marketing_consent ? "Sí" : "No", r.privacy_notice_version, r.requested_at, r.resource_title]));
     if ((result.data?.length ?? 0) < 1000) break;

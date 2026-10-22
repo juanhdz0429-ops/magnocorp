@@ -1,4 +1,5 @@
 import { useState, type FormEvent, type ChangeEvent } from "react";
+import { z } from "zod";
 import { useServerFn } from "@tanstack/react-start";
 import { Upload, Save, LoaderCircle, FileCheck2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -26,9 +27,9 @@ export function ResourceEditor({ resource, open, maxMb, onClose, onSaved }: { re
     if (!selected) return;
     setError(""); setProgress(0);
     try {
-      const extension = selected.name.split(".").pop()?.toLowerCase() ?? "";
+      const extension = z.enum(["pdf", "mp4", "webm", "xlsx", "docx", "csv", "jpg", "jpeg", "png", "webp"]).parse(selected.name.split(".").pop()?.toLowerCase() ?? "");
       const args = { type: kind, mime: selected.type || (extension === "csv" ? "text/csv" : ""), size: selected.size, extension };
-      const validated = await prepare({ data: args as Parameters<typeof prepare>[0]["data"] });
+      const validated = await prepare({ data: args });
       await new Promise<void>((resolve, reject) => {
         const xhr = new XMLHttpRequest(); xhr.open("PUT", validated.url);
         xhr.setRequestHeader("Content-Type", args.mime); xhr.setRequestHeader("x-upsert", "false");

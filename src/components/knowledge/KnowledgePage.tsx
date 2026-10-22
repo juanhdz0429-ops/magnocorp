@@ -22,7 +22,7 @@ export function KnowledgePage() {
   const [copied, setCopied] = useState<number | null>(null);
   const [copyError, setCopyError] = useState("");
   const visible = data.resources.filter(r => r.title.toLocaleLowerCase("es").includes(search.toLocaleLowerCase("es")) && (category === "Todos" || r.category === category) && (type === "all" || r.resource_type === type));
-  async function copy(index: number) { try { await navigator.clipboard.writeText(PROMPTS[index].prompt); setCopied(index); setCopyError(""); window.setTimeout(() => setCopied(null), 2000); } catch { setCopyError("No se pudo copiar. Selecciona el texto y cópialo."); } }
+  async function copy(index: number) { const prompt = PROMPTS[index]; if (!prompt) return; try { await navigator.clipboard.writeText(prompt.prompt); setCopied(index); setCopyError(""); window.setTimeout(() => setCopied(null), 2000); } catch { setCopyError("No se pudo copiar. Selecciona el texto y cópialo."); } }
   return <div className="knowledge-page"><Header /><main>
     <section className="relative isolate overflow-hidden bg-navy-ink text-primary-foreground">
       <img src={hero} alt="Espacio de aprendizaje empresarial con herramientas digitales y libros" width={1536} height={864} fetchPriority="high" className="absolute inset-0 -z-10 h-full w-full object-cover object-right" />

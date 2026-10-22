@@ -33,7 +33,7 @@ export async function verifyStoredFile(client: SupabaseClient<Database>, bucket:
   const { data, error } = await client.storage.from(bucket).info(path);
   if (error || !data) throw new Error("El archivo no está disponible. Vuelve a cargarlo.");
   const allowed = type === "cover" ? COVER_MIME_TYPES : FILE_MIME_TYPES[type];
-  if (!allowed.includes(data.contentType ?? "") || data.size > maxMb * 1024 * 1024) throw new Error("El formato o tamaño del archivo no está permitido.");
+  if (!allowed.includes(data.contentType ?? "") || typeof data.size !== "number" || data.size > maxMb * 1024 * 1024) throw new Error("El formato o tamaño del archivo no está permitido.");
   if (type === "pdf") {
     const signed = await client.storage.from(bucket).createSignedUrl(path, 60);
     if (!signed.data) throw new Error("No se pudo comprobar el archivo.");

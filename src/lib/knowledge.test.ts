@@ -1,4 +1,6 @@
-import { describe, expect, it } from "bun:test";
+import { describe, it } from "node:test";
+import { strictEqual } from "node:assert";
+const expect = (actual: unknown) => ({ toBe: (expected: unknown) => strictEqual(actual, expected) });
 import { accessSchema, resourceSchema, isPublished, canDownload, csvCell } from "./knowledge";
 
 const access = { resource_id: "11111111-1111-4111-8111-111111111111", full_name: "Juan Hernández", email: "juan@example.com" };
