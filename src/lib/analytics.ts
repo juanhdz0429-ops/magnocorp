@@ -9,7 +9,7 @@ let initialized = false;
 
 export function initAnalytics() {
   if (typeof window === "undefined" || initialized) return;
-  const id = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_ANALYTICS_API_KEY as string | undefined;
+  const id = import.meta.env["VITE_LOVABLE_CONNECTOR_GOOGLE_ANALYTICS_API_KEY"] as string | undefined;
   if (!id) return;
   initialized = true;
   const s = document.createElement("script");
