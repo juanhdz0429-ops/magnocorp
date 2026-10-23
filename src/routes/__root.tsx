@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { supabase } from "@/integrations/supabase/client";
 import { RecoveryContext } from "@/lib/auth-recovery";
+import { initAnalytics, trackPageView } from "@/lib/analytics";
 
 function NotFoundComponent() {
   return (
@@ -141,6 +142,14 @@ function RootComponent() {
     });
     return () => data.subscription.unsubscribe();
   }, [router, queryClient]);
+
+  useEffect(() => {
+    initAnalytics();
+    trackPageView(router.state.location.pathname);
+    return router.subscribe("onResolved", ({ toLocation, pathChanged }) => {
+      if (pathChanged) trackPageView(toLocation.pathname);
+    });
+  }, [router]);
 
   return (
     <QueryClientProvider client={queryClient}>
