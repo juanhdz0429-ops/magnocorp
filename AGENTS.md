@@ -18,3 +18,5 @@
 - Preserve submitted identity and consent per resource access without overwriting existing lead identity; this prevents unauthenticated submissions from altering historical consent.
 - Keep password-recovery state in the root auth-event context; the auth client can consume the recovery URL before the reset form mounts.
 - Preserve the existing single-page sections and make their anchors point home from added pages; only Conocimiento gets new public navigation routes.
+- Keep authentication emails in the managed scaffold with all six action types and SDK-owned verification, dispatch and retries; /lovable/* must bypass app guards because each endpoint authenticates its own caller.
+- Share email-safe branding through the template layout rather than loading site CSS; mail clients require inline styles and a white body background.
