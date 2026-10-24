@@ -3,7 +3,9 @@ import { createStart, createCsrfMiddleware, createMiddleware } from "@tanstack/r
 import { renderErrorPage } from "./lib/error-page";
 import { attachSupabaseAuth } from "@/integrations/supabase/auth-attacher";
 
-const errorMiddleware = createMiddleware().server(async ({ next }) => {
+const errorMiddleware = createMiddleware().server(async ({ request, next }) => {
+  // Managed email endpoints perform their own authentication and error handling.
+  if (new URL(request.url).pathname.startsWith('/lovable/')) return next();
   try {
     return await next();
   } catch (error) {
@@ -22,7 +24,7 @@ const errorMiddleware = createMiddleware().server(async ({ next }) => {
 // file opts out, so re-add it explicitly to keep server functions protected
 // from cross-site requests.
 const csrfMiddleware = createCsrfMiddleware({
-  filter: (ctx) => ctx.handlerType === "serverFn",
+  filter: (ctx) => !new URL(ctx.request.url).pathname.startsWith('/lovable/') && ctx.handlerType === "serverFn",
 });
 
 export const startInstance = createStart(() => ({

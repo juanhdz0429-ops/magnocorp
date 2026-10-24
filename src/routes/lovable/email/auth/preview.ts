@@ -18,7 +18,7 @@ const EMAIL_TEMPLATES: Record<string, React.ComponentType<any>> = {
 }
 
 // Configuration
-const SITE_NAME = "MagnoCorp Navigator"
+const SITE_NAME = "MagnoCorp"
 const ROOT_DOMAIN = "magnocorp.online"
 
 // Sample data for preview mode ONLY (not used in actual email sending).
