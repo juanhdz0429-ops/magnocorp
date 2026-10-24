@@ -9,3 +9,9 @@
 - [x] Finalize and publish the privacy notice with the confirmed address (Col. Centro, C.P. 82010, Mazatlán, Sinaloa) and enable resource downloads.
 - [ ] Verify visitor lead capture and actual download with the owner's real material — blocked until the owner uploads a real resource.
 - [ ] Verify password recovery through the owner's emailed recovery link — no real recovery link available.
+
+# Authentication emails
+
+- [ ] Customize the six managed authentication emails with MagnoCorp branding and Spanish content.
+- [ ] Verify template rendering and that email endpoints retain their own authentication.
+- [ ] Activate branded sending on the published site — requires sender-domain verification and a new publish.
