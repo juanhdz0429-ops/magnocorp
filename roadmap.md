@@ -12,6 +12,6 @@
 
 # Authentication emails
 
-- [ ] Customize the six managed authentication emails with MagnoCorp branding and Spanish content.
-- [ ] Verify template rendering and that email endpoints retain their own authentication.
+- [x] Customize the six managed authentication emails with MagnoCorp branding and Spanish content.
+- [x] Verify HTML/text rendering, all six authenticated preview requests, mobile layout, unsigned-request rejection and existing tests.
 - [ ] Activate branded sending on the published site — requires sender-domain verification and a new publish.
